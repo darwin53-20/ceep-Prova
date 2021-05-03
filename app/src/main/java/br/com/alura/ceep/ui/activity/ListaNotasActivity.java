@@ -3,16 +3,23 @@ package br.com.alura.ceep.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.List;
 
 import br.com.alura.ceep.R;
+import br.com.alura.ceep.Utils.Preferencias;
 import br.com.alura.ceep.dao.NotaDAO;
 import br.com.alura.ceep.model.Nota;
 import br.com.alura.ceep.ui.recyclerview.adapter.ListaNotasAdapter;
@@ -28,8 +35,12 @@ import static br.com.alura.ceep.ui.activity.NotaActivityConstantes.POSICAO_INVAL
 public class ListaNotasActivity extends AppCompatActivity {
 
 
+
     public static final String TITULO_APPBAR = "Notas";
+    public static final int MODO_STAGGERED = 2;
+    public static final int MODO_LINEAR = 1;
     private ListaNotasAdapter adapter;
+    private RecyclerView listaNotas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +100,59 @@ public class ListaNotasActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_lista_notas,menu);
+        int modoDeListagem = Preferencias.pegarPreferencias(this);
+
+        switch (modoDeListagem){
+
+            case 1:
+                configurarInterfaceParaListaLinear(menu.getItem(0));
+                break;
+
+            case 2:
+                configurarInterfaceParaListaEscalonada(menu.getItem(0));
+                break;
+
+            default:
+                Log.e("PARAMETROS", "Modo de listagem inválido");
+                break;
+        }
+
+        return true;
+    }
+
+    private void configurarInterfaceParaListaEscalonada(MenuItem item) {
+        item.setIcon(R.drawable.ic_list_white_24dp);
+        listaNotas.setLayoutManager(new StaggeredGridLayoutManager(2,1));
+    }
+
+    private void configurarInterfaceParaListaLinear(MenuItem item) {
+        item.setIcon(R.drawable.ic_grid_on_white_24dp);
+        listaNotas.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(Preferencias.pegarPreferencias(this) == MODO_LINEAR){
+            configurarInterfaceParaListaEscalonada(item);
+            salvarModoDeListagem(MODO_STAGGERED);
+        }else{
+            configurarInterfaceParaListaLinear(item);
+            salvarModoDeListagem(MODO_LINEAR);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void salvarModoDeListagem(int modoDeListagem) {
+        Preferencias.salvarModoDeListagem(modoDeListagem, this);
+    }
+
+
     private void altera(Nota nota, int posicao) {
         new NotaDAO().altera(posicao, nota);
         adapter.altera(posicao, nota);
@@ -130,7 +194,7 @@ public class ListaNotasActivity extends AppCompatActivity {
     }
 
     private void configuraRecyclerView(List<Nota> todasNotas) {
-        RecyclerView listaNotas = findViewById(R.id.lista_notas_recyclerview);
+        listaNotas = findViewById(R.id.lista_notas_recyclerview);
         configuraAdapter(todasNotas, listaNotas);
         configuraItemTouchHelper(listaNotas);
     }
