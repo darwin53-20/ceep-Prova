@@ -137,6 +137,26 @@ public class ListaNotasActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
+        switch (item.getItemId()){
+            case R.id.menu_lista_exibicao_icone:
+                selecionaModoListagem(item);
+                return true;
+
+            case R.id.menu_layout_feedback:
+                enviaParaFeedback();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void enviaParaFeedback() {
+        Intent abreFeedback = new Intent(ListaNotasActivity.this, FeedbackActivity.class);
+        startActivity(abreFeedback);
+    }
+
+    private void selecionaModoListagem(MenuItem item) {
         if(Preferencias.pegarPreferencias(this) == MODO_LINEAR){
             configurarInterfaceParaListaEscalonada(item);
             salvarModoDeListagem(MODO_STAGGERED);
@@ -144,8 +164,6 @@ public class ListaNotasActivity extends AppCompatActivity {
             configurarInterfaceParaListaLinear(item);
             salvarModoDeListagem(MODO_LINEAR);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void salvarModoDeListagem(int modoDeListagem) {

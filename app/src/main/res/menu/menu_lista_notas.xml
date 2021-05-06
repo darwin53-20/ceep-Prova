@@ -8,4 +8,10 @@
         android:title="Alterar Exibição"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/menu_layout_feedback"
+        android:icon="@drawable/ic_feedback"
+        android:title="Enviar_Layout_Feedback"
+        app:showAsAction="always" />
+
 </menu>

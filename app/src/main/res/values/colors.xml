@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#c66900</color>
     <color name="colorAccent">#000000</color>
     <color name="colorBackgroundList">#eeeeee</color>
+    <color name="corFeedbackTitulo">#a3202124</color>
 
     <color name="azulLista">#408EC9</color>
     <color name="brancoLista">#FFFFFF</color>
