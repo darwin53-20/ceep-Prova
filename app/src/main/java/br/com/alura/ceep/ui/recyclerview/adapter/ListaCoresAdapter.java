@@ -32,8 +32,9 @@ public class ListaCoresAdapter extends RecyclerView.Adapter<ListaCoresAdapter.Co
         this.onColorClickListener = onColorClickListener;
     }
 
+    @NonNull
     @Override
-    public CorViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
+    public CorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View viewCriada = LayoutInflater.from(context).inflate(R.layout.item_cor, parent, false);
         return new CorViewHolder(viewCriada);
@@ -56,7 +57,7 @@ public class ListaCoresAdapter extends RecyclerView.Adapter<ListaCoresAdapter.Co
         return cores.size();
     }
 
-    class CorViewHolder extends RecyclerView.ViewHolder{
+    static class CorViewHolder extends RecyclerView.ViewHolder{
         ImageView corDeFundo;
         public CorViewHolder(View itemView){
             super(itemView);

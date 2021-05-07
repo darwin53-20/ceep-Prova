@@ -5,7 +5,7 @@
     <item
         android:id="@+id/menu_envia_feedback"
         android:icon="@android:drawable/ic_menu_send"
-        android:title="Envia feedback"
+        android:title="@string/envia_feedback"
         app:showAsAction="always" />
 
 </menu>

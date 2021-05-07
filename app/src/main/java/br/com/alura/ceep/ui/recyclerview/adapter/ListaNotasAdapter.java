@@ -1,6 +1,8 @@
 package br.com.alura.ceep.ui.recyclerview.adapter;
 
 import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
@@ -10,9 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.alura.ceep.R;
@@ -21,21 +22,21 @@ import br.com.alura.ceep.ui.recyclerview.adapter.listener.OnItemClickListener;
 
 public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.NotaViewHolder> {
 
-    private final List<Nota> notas;
+    private final List<Nota> notas = new ArrayList<>();
     private final Context context;
     private OnItemClickListener onItemClickListener;
 
-    public ListaNotasAdapter(Context context, List<Nota> notas) {
+    public ListaNotasAdapter(Context context) {
         this.context = context;
-        this.notas = notas;
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
+    @NonNull
     @Override
-    public ListaNotasAdapter.NotaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListaNotasAdapter.NotaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View viewCriada = LayoutInflater.from(context)
                 .inflate(R.layout.item_nota, parent, false);
         return new NotaViewHolder(viewCriada);
@@ -52,19 +53,10 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
         return notas.size();
     }
 
-    public void altera(int posicao, Nota nota) {
-        notas.set(posicao, nota);
+    public void atualiza(List<Nota> notas) {
+        this.notas.clear();
+        this.notas.addAll(notas);
         notifyDataSetChanged();
-    }
-
-    public void remove(int posicao) {
-        notas.remove(posicao);
-        notifyItemRemoved(posicao);
-    }
-
-    public void troca(int posicaoInicial, int posicaoFinal) {
-        Collections.swap(notas, posicaoInicial, posicaoFinal);
-        notifyItemMoved(posicaoInicial, posicaoFinal);
     }
 
     class NotaViewHolder extends RecyclerView.ViewHolder {
@@ -97,11 +89,6 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
             biggerCircle.getPaint().setColor(Color.parseColor(nota.getCor()));  //Dá para colocar qualquer cor aqui
             itemView.setBackgroundDrawable(biggerCircle);
         }
-    }
-
-    public void adiciona(Nota nota) {
-        notas.add(nota);
-        notifyDataSetChanged();
     }
 
 }

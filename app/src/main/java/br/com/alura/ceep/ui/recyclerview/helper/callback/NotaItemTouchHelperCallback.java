@@ -4,19 +4,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import br.com.alura.ceep.asynctask.RemoveNotaPelaPosicaoTask;
+import br.com.alura.ceep.asynctask.TrocaNotasTask;
 import br.com.alura.ceep.dao.NotaDAO;
 import br.com.alura.ceep.ui.recyclerview.adapter.ListaNotasAdapter;
 
 public class NotaItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     private final ListaNotasAdapter adapter;
+    private final NotaDAO dao;
 
-    public NotaItemTouchHelperCallback(ListaNotasAdapter adapter) {
+    public NotaItemTouchHelperCallback(ListaNotasAdapter adapter, NotaDAO dao) {
         this.adapter = adapter;
+        this.dao = dao;
     }
 
     @Override
-    public int getMovementFlags(@NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+    public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
         int marcacoesDeDeslize = ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT;
         int marcacoesDeArrastar = ItemTouchHelper.DOWN | ItemTouchHelper.UP
                 | ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT;
@@ -32,8 +36,7 @@ public class NotaItemTouchHelperCallback extends ItemTouchHelper.Callback {
     }
 
     private void trocaNotas(int posicaoInicial, int posicaoFinal) {
-        new NotaDAO().troca(posicaoInicial, posicaoFinal);
-        adapter.troca(posicaoInicial, posicaoFinal);
+        new TrocaNotasTask(dao, adapter, posicaoInicial,posicaoFinal).execute();
     }
 
     @Override
@@ -43,7 +46,6 @@ public class NotaItemTouchHelperCallback extends ItemTouchHelper.Callback {
     }
 
     private void removeNota(int posicao) {
-        new NotaDAO().remove(posicao);
-        adapter.remove(posicao);
+        new RemoveNotaPelaPosicaoTask(dao, adapter, posicao).execute();
     }
 }

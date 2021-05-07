@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="170dp"
         android:adjustViewBounds="false"
-        android:contentDescription="FEEDBACK_IMAGEMVIEW"
+        android:contentDescription="@string/feedback_imagemview"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Deixe o seu Feedback! :)"
+        android:text="@string/texto_fixo_informa_deixar_feedback"
         android:textColor="#FFFFFF"
         android:background="@color/corFeedbackTitulo"
         android:textSize="18sp"
@@ -41,7 +41,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="E-mail" />
+            android:hint="@string/e_mail" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -56,7 +56,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Escreva seu feedback" />
+            android:hint="@string/escrevendo_feedback" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Envie dúvidas ou sugestões sobre a sua experiência com o Ceep. Usaremos as informações fornecidas para aprimorar a experiência da App"
+        android:text="@string/explicando_como_fazer_feedback"
         app:layout_constraintEnd_toEndOf="@+id/feedback_descricao"
         app:layout_constraintStart_toStartOf="@+id/feedback_descricao"
         app:layout_constraintTop_toBottomOf="@+id/feedback_descricao" />

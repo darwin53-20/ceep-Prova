@@ -3,12 +3,11 @@ package br.com.alura.ceep.ui.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
 import br.com.alura.ceep.R;
-import br.com.alura.ceep.Utils.Preferencias;
+import br.com.alura.ceep.utils.Preferencias;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

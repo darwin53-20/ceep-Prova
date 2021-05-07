@@ -3,7 +3,6 @@ package br.com.alura.ceep.ui.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,9 +26,8 @@ public class FeedbackActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.menu_envia_feedback:
-                finish();
+        if (item.getItemId() == R.id.menu_envia_feedback) {
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

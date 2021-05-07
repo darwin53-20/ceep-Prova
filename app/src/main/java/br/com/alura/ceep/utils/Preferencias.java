@@ -1,4 +1,4 @@
-package br.com.alura.ceep.Utils;
+package br.com.alura.ceep.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

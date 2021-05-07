@@ -18,5 +18,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ceep_logo_branco" />
+        android:src="@drawable/ceep_logo_branco"
+        android:contentDescription="@string/logo_ceep" />
 </androidx.constraintlayout.widget.ConstraintLayout>
