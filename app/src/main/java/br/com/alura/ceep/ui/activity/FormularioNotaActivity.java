@@ -23,7 +23,6 @@ import br.com.alura.ceep.dao.NotaDAO;
 import br.com.alura.ceep.dataBase.NotasDatabase;
 import br.com.alura.ceep.model.Nota;
 import br.com.alura.ceep.ui.recyclerview.adapter.ListaCoresAdapter;
-import br.com.alura.ceep.ui.recyclerview.adapter.listener.OnColorClickListener;
 
 import static br.com.alura.ceep.ui.activity.NotaActivityConstantes.CHAVE_NOTA;
 
@@ -125,16 +124,13 @@ public class FormularioNotaActivity extends AppCompatActivity {
     private void configuraAdapter(RecyclerView rvCores, List<String> listaCores) {
         ListaCoresAdapter listaCoresAdapter = new ListaCoresAdapter(listaCores, this);
         rvCores.setAdapter(listaCoresAdapter);
-        listaCoresAdapter.setOnColorClickListener(new OnColorClickListener() {
-            @Override
-            public void onItemClick(String corEscolhida) {
-                try {
-                    layoutNotaFormulario.setBackgroundColor(Color.parseColor(corEscolhida));
-                    corDeFundoSelecionada = corEscolhida;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Houve um erro ao selecionar a cor", Toast.LENGTH_SHORT).show();
-                }
+        listaCoresAdapter.setOnColorClickListener(corEscolhida -> {
+            try {
+                layoutNotaFormulario.setBackgroundColor(Color.parseColor(corEscolhida));
+                corDeFundoSelecionada = corEscolhida;
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Houve um erro ao selecionar a cor", Toast.LENGTH_SHORT).show();
             }
         });
     }

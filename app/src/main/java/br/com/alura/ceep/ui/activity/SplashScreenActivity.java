@@ -24,12 +24,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
 
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Preferencias.salvaAcesso(getApplicationContext());
-                enviaParaListaNotasActivity();
-            }
+        new Handler().postDelayed(() -> {
+            Preferencias.salvaAcesso(getApplicationContext());
+            enviaParaListaNotasActivity();
         }, duracao);
     }
 

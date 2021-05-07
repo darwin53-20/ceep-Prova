@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 
@@ -60,12 +59,7 @@ public class ListaNotasActivity extends AppCompatActivity implements OnItemClick
 
     private void configuraBotaoInsereNota() {
         TextView botaoInsereNota = findViewById(R.id.lista_notas_insere_nota);
-        botaoInsereNota.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                vaiParaFormularioNotaActivityInsere();
-            }
-        });
+        botaoInsereNota.setOnClickListener(view -> vaiParaFormularioNotaActivityInsere());
     }
 
     private void vaiParaFormularioNotaActivityInsere() {

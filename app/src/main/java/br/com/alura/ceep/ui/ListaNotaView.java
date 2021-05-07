@@ -15,13 +15,11 @@ import br.com.alura.ceep.ui.recyclerview.helper.callback.NotaItemTouchHelperCall
 public class ListaNotaView {
     private final ListaNotasAdapter adapter;
     private final NotaDAO dao;
-    private final Context context;
 
     public ListaNotaView(Context context) {
         adapter = new ListaNotasAdapter(context);
         this.dao = NotasDatabase.getInstance(context)
                 .getNotaDAO();
-        this.context = context;
         adapter.setOnItemClickListener((OnItemClickListener) context);
     }
 

@@ -44,12 +44,7 @@ public class ListaCoresAdapter extends RecyclerView.Adapter<ListaCoresAdapter.Co
     public void onBindViewHolder(CorViewHolder holder, final int position) {
         final String cor = cores.get(position);
         holder.setCorDeFundo(cor);
-        holder.corDeFundo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onColorClickListener.onItemClick(cor);
-            }
-        });
+        holder.corDeFundo.setOnClickListener(view -> onColorClickListener.onItemClick(cor));
     }
 
     @Override
